@@ -125,16 +125,23 @@ public class Purse {
     	// Your code might use some other variable for the remaining amount to withdraw.
     	List<Coin> templist = new ArrayList<Coin>();
     	Collections.sort(money);
+    	Collections.reverse(money);
     	double amountNeededToWithdraw = amount;
-    	for (int i = money.size()-1; i >= 0; i--) {
-    		if ( amountNeededToWithdraw != 0 ) {	
-    			// failed. Don't change the contents of the purse.
-    			if (amountNeededToWithdraw - money.get(i).getValue() >= 0) {
-    				amountNeededToWithdraw -= money.get(i).getValue();
-    				templist.add(money.get(i));
-    			}
+    	for (Coin c : money) {
+    		if (amountNeededToWithdraw >= c.getValue()) {
+    			templist.add(c);
+    			amountNeededToWithdraw -= c.getValue();
+    			
+   
     		}
+    		if (amountNeededToWithdraw == 0) break;
+    		
     	}
+    	for(Coin c : templist) {
+			money.remove(c);
+		}
+    	
+    	if (amountNeededToWithdraw != 0) return null;
     	Coin[] array = new Coin[templist.size()];
     	templist.toArray(array);
     	
@@ -145,7 +152,7 @@ public class Purse {
 		// and return them as an array.
 		// Use list.toArray( array[] ) to copy a list into an array.
 		// toArray returns a reference to the array itself.
-        return new Coin[0]; //TODO replace this with real code
+        return array;
 	}
   
     /** 
@@ -153,8 +160,7 @@ public class Purse {
      * It can return whatever is a useful description.
      */
     public String toString() {
-    	return String.format("%d coins with value %.1f", this.count(), this.getBalance());
+    	return String.format("This purse have %d coin(s) with a value of %.1f and %d capacity.", this.count(), this.getBalance(), this.capacity);
     }
 
 }
-//TODO When you finish, there should not be any TODO comments, including this one!
