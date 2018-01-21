@@ -37,9 +37,7 @@ public class Purse {
      * @return the number of coins in the purse
      */
     public int count() {
-    	int count = 0;
-    	for (Coin c : money) count++;
-    	return count;
+    	return money.size();
     }
     
     /** 
@@ -99,11 +97,8 @@ public class Purse {
 	 *    or null if cannot withdraw requested amount.
      */
     public Coin[] withdraw( double amount ) {
-    
-    	if (amount < 0) {
-    		return null;
-    	}
-
+    	
+    	if (amount < 0) return null;
 	   /*
 		* See lab sheet for outline of a solution, 
 		* or devise your own solution.
@@ -123,10 +118,12 @@ public class Purse {
 		// Did we get the full amount?
 		// This code assumes you decrease amount each time you remove a coin.
     	// Your code might use some other variable for the remaining amount to withdraw.
+    	
     	List<Coin> templist = new ArrayList<Coin>();
     	Collections.sort(money);
     	Collections.reverse(money);
     	double amountNeededToWithdraw = amount;
+
     	for (Coin c : money) {
     		if (amountNeededToWithdraw >= c.getValue()) {
     			templist.add(c);
@@ -137,11 +134,11 @@ public class Purse {
     		if (amountNeededToWithdraw == 0) break;
     		
     	}
-    	for(Coin c : templist) {
-			money.remove(c);
-		}
     	
     	if (amountNeededToWithdraw != 0) return null;
+    	
+    	for(Coin c : templist) money.remove(c);
+    	
     	Coin[] array = new Coin[templist.size()];
     	templist.toArray(array);
     	
