@@ -8,6 +8,7 @@ package coinpurse;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class MoneyUtil {
@@ -16,8 +17,8 @@ public class MoneyUtil {
 	 * Print one coin at a time using for each loop.
 	 * @param List of coins 
 	 */
-	public static void printCoins(List<Coin> coins) {
-		for (Coin c : coins) {
+	public static void printMoney(List<Valuable> money) {
+		for (Valuable c : money) {
 			System.out.println(c);
 		}
 	}
@@ -26,8 +27,9 @@ public class MoneyUtil {
 	 * Sort into an ascending order of coins.
 	 * @param List of coins
 	 */
-	public static void sortCoins(List<Coin> coins) {
-		Collections.sort(coins);
+	public static void sortMoney(List<Valuable> money) {
+		Comparator<Valuable> comp = new ValueComparator();
+		Collections.sort(money,comp);
 	}
 	
 	/**
@@ -36,9 +38,9 @@ public class MoneyUtil {
 	 * @param currency
 	 * @return List of coins that contains only the coins from the parameter
 	 */
-	public static List<Coin> filterByCurrency(List<Coin> coins, String currency) {
-		List<Coin> filteredList = new ArrayList<Coin>();
-		for (Coin c : coins) {
+	public static List<Valuable> filterByCurrency(List<Valuable> money, String currency) {
+		List<Valuable> filteredList = new ArrayList<Valuable>();
+		for (Valuable c : money) {
 			if (c.getCurrency().equals(currency)) filteredList.add(c);
 		}
 		return filteredList;
@@ -49,16 +51,19 @@ public class MoneyUtil {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		List<Coin> coins = new ArrayList<Coin>();
-		coins.add(new Coin(10.0, "Baht"));
-		coins.add(new Coin(6.9, "USD"));
-		coins.add(new Coin(0.25, "Baht"));
-		coins.add(new Coin(1.0, "Baht"));
-		printCoins(coins);
+		List<Valuable> valuable = new ArrayList<Valuable>();
+		valuable.add(new Coin(10.0, "Baht"));
+		valuable.add(new Coin(6.9, "USD"));
+		valuable.add(new Coin(0.25, "Baht"));
+		valuable.add(new Coin(1.0, "Baht"));
+		printMoney(valuable);
+		sortMoney(valuable);
+		System.out.println("--Sorted--");
+		printMoney(valuable);
 		
-		sortCoins(coins);
-		System.out.println("Sorted");
-		printCoins(coins);
+		
+		
+		
 	}
 	
 	

@@ -3,6 +3,7 @@ package coinpurse;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 // You will use Collections.sort() to sort the coins
 
@@ -15,7 +16,7 @@ import java.util.Collections;
  */
 public class Purse {
     /** Collection of objects in the purse. */
-	private List<Coin> money;
+	private List<Valuable> money;
     
     /** Capacity is maximum number of items the purse can hold.
      *  Capacity is set when the purse is created and cannot be changed.
@@ -27,7 +28,7 @@ public class Purse {
      *  @param capacity is maximum number of coins you can put in purse.
      */
     public Purse( int capacity ) {
-    	money = new ArrayList<Coin>();
+    	money = new ArrayList<Valuable>();
     	this.capacity = capacity;
     }
 
@@ -46,7 +47,7 @@ public class Purse {
      */
     public double getBalance() {
     	double total = 0.0;
-    	for (Coin c : money) total += c.getValue();
+    	for (Valuable c : money) total += c.getValue();
 		return total; 
 	}
 
@@ -79,7 +80,7 @@ public class Purse {
      * @param coin is a Coin object to insert into purse
      * @return true if coin inserted, false if can't insert
      */
-    public boolean insert( Coin coin ) {
+    public boolean insert( Valuable coin ) {
         // if the purse is already full then can't insert anything.
         if (this.isFull() || coin.getValue() <= 0) {
         	return false;
@@ -96,7 +97,7 @@ public class Purse {
      *  @return array of Coin objects for money withdrawn, 
 	 *    or null if cannot withdraw requested amount.
      */
-    public Coin[] withdraw( double amount ) {
+    public Valuable[] withdraw( double amount ) {
     	
     	if (amount < 0) return null;
 	   /*
@@ -118,13 +119,14 @@ public class Purse {
 		// Did we get the full amount?
 		// This code assumes you decrease amount each time you remove a coin.
     	// Your code might use some other variable for the remaining amount to withdraw.
-    	
-    	List<Coin> templist = new ArrayList<Coin>();
-    	Collections.sort(money);
+    	Comparator<Valuable> comp = new ValueComparator();
+
+    	List<Valuable> templist = new ArrayList<Valuable>();
+    	Collections.sort( money, comp);
     	Collections.reverse(money);
     	double amountNeededToWithdraw = amount;
 
-    	for (Coin c : money) {
+    	for (Valuable c : money) {
     		if (amountNeededToWithdraw >= c.getValue()) {
     			templist.add(c);
     			amountNeededToWithdraw -= c.getValue();
@@ -137,9 +139,9 @@ public class Purse {
     	
     	if (amountNeededToWithdraw != 0) return null;
     	
-    	for(Coin c : templist) money.remove(c);
+    	for(Valuable c : templist) money.remove(c);
     	
-    	Coin[] array = new Coin[templist.size()];
+    	Valuable[] array = new Valuable[templist.size()];
     	templist.toArray(array);
     	
     	
