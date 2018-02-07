@@ -23,6 +23,11 @@ public class Purse {
      */
     private final int capacity;
     
+    /**
+     * Create new ValueComparator object as a private attribute.
+     */
+    private Comparator<Valuable> comp = new ValueComparator();
+    
     /** 
      *  Create a purse with a specified capacity.
      *  @param capacity is maximum number of coins you can put in purse.
@@ -100,26 +105,7 @@ public class Purse {
     public Valuable[] withdraw( double amount ) {
     	
     	if (amount < 0) return null;
-	   /*
-		* See lab sheet for outline of a solution, 
-		* or devise your own solution.
-		* The idea is to be greedy.
-		* Try to withdraw the largest coins possible.
-		* Each time you choose a coin as a candidate for
-		* withdraw, add it to a temporary list and
-		* decrease the amount (remainder) to withdraw.
-		* 
-		* If you reach a point where amountNeededToWithdraw == 0
-		* then you found a solution!
-		* Now, use the temporary list to remove coins
-		* from the money list, and return the temporary
-		* list (as an array).
-		*/
-		
-		// Did we get the full amount?
-		// This code assumes you decrease amount each time you remove a coin.
-    	// Your code might use some other variable for the remaining amount to withdraw.
-    	Comparator<Valuable> comp = new ValueComparator();
+	  
 
     	List<Valuable> templist = new ArrayList<Valuable>();
     	Collections.sort( money, comp);
@@ -147,7 +133,7 @@ public class Purse {
     	
 
 		// Success.
-		// Remove the coins you want to withdraw from purse,
+		// Remove the valuable you want to withdraw from purse,
 		// and return them as an array.
 		// Use list.toArray( array[] ) to copy a list into an array.
 		// toArray returns a reference to the array itself.
