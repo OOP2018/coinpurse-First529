@@ -146,7 +146,17 @@ public class Purse {
 		// toArray returns a reference to the array itself.
 		return array;
 	}
-
+	
+	/**
+	 * Withdraw the requested amount of money with the same currency. Return an array of Valuable
+	 * withdrawn from purse, or return null if cannot withdraw the amount
+	 * requested.
+	 * 
+	 * @param amount
+	 *            is the amount to withdraw
+	 * @return array of Valuable objects for money withdrawn, or null if cannot
+	 *         withdraw requested amount.
+	 */
 	public Valuable[] withdraw(Valuable amount) {
 
 		if (amount == null && amount.getValue() < 0)
