@@ -168,7 +168,7 @@ public class Purse {
 		String amountCurrency = amount.getCurrency();
 
 		for (Valuable c : money) {
-			if (amountCurrency.equalsIgnoreCase(c.getCurrency())) {
+			if (amountCurrency.equalsIgnoreCase(c.getCurrency()) && amount.getClass() == c.getClass()) {
 				if (amountNeededToWithdraw >= c.getValue()) {
 					templist.add(c);
 					amountNeededToWithdraw -= c.getValue();

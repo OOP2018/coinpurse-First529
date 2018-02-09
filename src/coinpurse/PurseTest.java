@@ -198,23 +198,31 @@ public class PurseTest {
 		purse.insert( makeCoin(20) ); // now it has 20 + 20
 		assertNull( purse.withdraw(30) );
 	}
-	
+	@Test(timeout = 1000)
 	public void testWithdrawValuable() {
 		Purse p = new Purse(10);
 		Money note20 = new BankNote(20, "Baht");
 		Money note50 = new BankNote(50, "Yen");
 		Money coin1 = new Coin(1, "Baht");
 		Money coin5 = new Coin(5, "Baht");
+		Money note2 = new BankNote(2, "Baht");
+		Money note21 = new BankNote(2, "Baht");
+		Money note22 = new BankNote(2, "Yen");
+
 		p.insert(note20);
 		p.insert(note50);
 		p.insert(coin1);
 		p.insert(coin5);
 		
 		assertEquals(76, p.getBalance(), TOL);
-		p.withdraw(new Coin(1, "Yen"));
+		p.withdraw(new BankNote(1, "Baht"));
 		assertEquals(76, p.getBalance(),TOL);
 		p.withdraw(new BankNote(20, "Baht"));
 		assertEquals(56, p.getBalance(), TOL);
+		assertFalse(note20.equals(note50));
+		assertTrue(note21.equals(note2));
+		assertFalse(note22.equals(note21));
+		
 		
 		
 		
