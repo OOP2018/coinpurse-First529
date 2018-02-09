@@ -199,6 +199,29 @@ public class PurseTest {
 		assertNull( purse.withdraw(30) );
 	}
 	
+	public void testWithdrawValuable() {
+		Purse p = new Purse(10);
+		Money note20 = new BankNote(20, "Baht");
+		Money note50 = new BankNote(50, "Yen");
+		Money coin1 = new Coin(1, "Baht");
+		Money coin5 = new Coin(5, "Baht");
+		p.insert(note20);
+		p.insert(note50);
+		p.insert(coin1);
+		p.insert(coin5);
+		
+		assertEquals(76, p.getBalance(), TOL);
+		p.withdraw(new Coin(1, "Yen"));
+		assertEquals(76, p.getBalance(),TOL);
+		p.withdraw(new BankNote(20, "Baht"));
+		assertEquals(56, p.getBalance(), TOL);
+		
+		
+		
+		
+	}
+	
+
 	/**
 	 * Sum the value of some coins.
 	 * @param wd1 array of coins
