@@ -4,50 +4,17 @@ package coinpurse;
  * @author Dechabhol Kotheeranurak
  */
 
-public class Coin implements Comparable<Coin>, Valuable {
-	
-	/** value of the coin*/
-	private double value;
-	/** currency of the coin*/
-	private String currency;
-	
+public class Coin extends Money {
+		
 	/**
 	 * Initializing parameters.
 	 * @param value
 	 * @param currency
 	 */
 	public Coin (double value, String currency) {
-		this.value = value;
-		this.currency = currency;
+		super(value, currency);
 	}
 	
-	/**
-	 * This method will return the value of the coin.
-	 * @return value
-	 */
-	public double getValue() {
-		return value;
-	}
-	
-	/**
-	 * This method will return the currency of the coin.
-	 * @return currency
-	 */
-	public String getCurrency() {
-		return currency;
-	}
-	
-	/**
-	 * Comparing two objects and return the value in a boolean format.
-	 * @param arg
-	 * @return true of false
-	 */
-	public boolean equals(Object arg) {
-		if (arg == null) return false;
-		if (arg.getClass() != this.getClass()) return false;
-		Coin other = (Coin) arg;
-		return this.value == other.value && this.currency == other.currency;
-	}
 	
 	/**
 	 * Order coins in which the smallest value comes first.
@@ -66,7 +33,7 @@ public class Coin implements Comparable<Coin>, Valuable {
 	 * @return String in a specific format
 	 */
 	public String toString() {
-		return String.format("%.2f-%s", this.value, this.currency);
+		return String.format("%.2f-%s", this.getValue(), this.getCurrency());
 	}
 
 }
