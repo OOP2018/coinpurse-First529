@@ -136,7 +136,7 @@ public class Purse {
 		Collections.reverse(money);
 		double amountNeededToWithdraw = amount.getValue();
 		String amountCurrency = amount.getCurrency();
-
+		
 		for (Valuable c : money) {
 			if (amountCurrency.equalsIgnoreCase(c.getCurrency())) {
 				if (amountNeededToWithdraw >= c.getValue()) {

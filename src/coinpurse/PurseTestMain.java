@@ -15,7 +15,7 @@ public class PurseTestMain {
 		System.out.println(n.insert(v2));
 		
 		
-		System.out.println(Arrays.toString(n.withdraw(30)));
+		System.out.println(Arrays.toString(n.withdraw(new BankNote(20, "Baht"))));
 		System.out.println(n.getBalance());
 		
 		

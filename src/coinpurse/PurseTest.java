@@ -21,7 +21,7 @@ import org.junit.Test;
 public class PurseTest {
 	/** tolerance for comparing two double values */
 	private static final double TOL = 1.0E-6;
-	private static final String CURRENCY = "BTC";
+	private static final String CURRENCY = "Baht";
 	
     /**
      * Sets up the test fixture.
@@ -215,10 +215,10 @@ public class PurseTest {
 		p.insert(coin5);
 		
 		assertEquals(76, p.getBalance(), TOL);
-		p.withdraw(new BankNote(1, "Baht"));
-		assertEquals(76, p.getBalance(),TOL);
+		p.withdraw(new Coin(1, "Baht"));
+		assertEquals(75, p.getBalance(),TOL);
 		p.withdraw(new BankNote(20, "Baht"));
-		assertEquals(56, p.getBalance(), TOL);
+		assertEquals(55, p.getBalance(), TOL);
 		assertFalse(note20.equals(note50));
 		assertTrue(note21.equals(note2));
 		assertFalse(note22.equals(note21));
