@@ -129,11 +129,18 @@ public class ConsoleDialog {
 
 	/** Make a Coin or BankNote using requested value. */
 	private Valuable makeMoney(double value) {
-		if (value >= 20) {
-			return new BankNote(value, CURRENCY);
-		} else {
-			return new Coin(value, CURRENCY);
+//		if (value >= 20) {
+//			return new BankNote(value, CURRENCY);
+//		} else {
+//			return new Coin(value, CURRENCY);
+//		}
+		MoneyFactory valuable = MoneyFactory.getInstance();
+		try {
+			return valuable.createMoney(value);
+		} catch (IllegalArgumentException ex) {
+			System.out.println("Sorry, " + value + " is not a valid ammount.");
 		}
+		return null;
 
 	}
 }

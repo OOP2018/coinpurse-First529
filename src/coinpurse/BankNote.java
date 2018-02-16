@@ -9,7 +9,8 @@ public class BankNote extends Money {
 	/**serial number of the bank note.*/
 	private long serialNumber;
 	/**The next serial number of the bank note.*/
-	private static long nextSerialNumber = 1000000;
+	private static long nextSerialNumberThai = 1000000;
+	private static long nextSerialNumberMalay = 1000000;
 
 	/**
 	 * The constructor.
@@ -18,7 +19,12 @@ public class BankNote extends Money {
 	 */
 	public BankNote(double value, String currency) {
 		super(value, currency);
-		this.serialNumber = nextSerialNumber++;
+		if (currency.equals("Ringgit")) {
+			this.serialNumber = nextSerialNumberMalay++;
+		}
+		if (currency.equals("Baht")) {
+			this.serialNumber = nextSerialNumberThai++;
+		}
 	}
 	
 	/**
