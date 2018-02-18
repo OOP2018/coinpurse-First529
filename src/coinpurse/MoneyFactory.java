@@ -21,7 +21,7 @@ public abstract class MoneyFactory {
 		double money = 0;
 		try{
 			money = Double.parseDouble(value);
-		} catch (Exception ex) {
+		} catch (IllegalArgumentException ex) {
 			throw new IllegalArgumentException("The input String doesn't contain number.");
 		}
 		return createMoney(money);

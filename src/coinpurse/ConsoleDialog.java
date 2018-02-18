@@ -77,14 +77,20 @@ public class ConsoleDialog {
 		// If so then use them without prompting for more.
 		String inline = console.nextLine().trim();
 		if (inline.isEmpty()) {
-			System.out.print("Enter value of coin(s) to deposit on one line [eg: 5 0.5 1]: ");
+			System.out.print("Enter value of coin(s) or banknote(s) to deposit on one line [eg: 5 0.5 1]: ");
 			inline = console.nextLine();
 		}
 		// parse input line into numbers
 		Scanner scanline = new Scanner(inline);
 		while (scanline.hasNextDouble()) {
 			double value = scanline.nextDouble();
-			Valuable money = makeMoney(value);
+			Valuable money;
+			try {
+                money = makeMoney(value);
+            } catch (IllegalArgumentException ex){
+                System.out.println("Sorry, " + value + " is not a valid amount.");
+                continue;
+            }
 			System.out.printf("Deposit %s... ", money.toString());
 			boolean ok = purse.insert(money);
 			System.out.println((ok ? "ok" : "FAILED"));
@@ -129,18 +135,7 @@ public class ConsoleDialog {
 
 	/** Make a Coin or BankNote using requested value. */
 	private Valuable makeMoney(double value) {
-//		if (value >= 20) {
-//			return new BankNote(value, CURRENCY);
-//		} else {
-//			return new Coin(value, CURRENCY);
-//		}
-		MoneyFactory valuable = MoneyFactory.getInstance();
-		try {
-			return valuable.createMoney(value);
-		} catch (IllegalArgumentException ex) {
-			System.out.println("Sorry, " + value + " is not a valid ammount.");
-		}
-		return null;
+		return MoneyFactory.getInstance().createMoney(value);
 
 	}
 }

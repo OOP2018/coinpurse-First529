@@ -7,10 +7,10 @@ public class MalayMoneyFactory extends MoneyFactory {
 		if (isCoin(value)) {
 			return new Coin(value, "Sen");
 		}
-		if (isBankNote(value)) {
+		else if (isBankNote(value)) {
 			return new BankNote(value, "Ringgit");
 		}
-		return null;
+		else throw new IllegalArgumentException();
 	}
 	
 	public boolean isCoin(double value) {

@@ -7,10 +7,10 @@ public class ThaiMoneyFactory extends MoneyFactory {
 		if (isCoin(value)) {
 			return new Coin(value, "Baht");
 		}
-		if (isBankNote(value)) {
+		else if (isBankNote(value)) {
 			return new BankNote(value, "Baht");
 		}
-		return null;
+		 else throw new IllegalArgumentException();
 	}
 	
 	public boolean isCoin(double value) {

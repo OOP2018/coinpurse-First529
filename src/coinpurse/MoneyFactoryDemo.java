@@ -19,7 +19,7 @@ public class MoneyFactoryDemo {
 			System.out.println(f3.createMoney(v));
 		}
 		System.out.println("Creating thai's banknote: ");
-		for (String v : banknotes) {
+		for (String v : thaiBanknotes) {
 			System.out.println(f3.createMoney(v));
 		}
 		
