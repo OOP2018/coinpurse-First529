@@ -1,4 +1,9 @@
 package coinpurse;
+/**
+ * MoneyFactory class for Malaysia.
+ * @author Dechabhol Kotheeranurak
+ *
+ */
 
 public class MalayMoneyFactory extends MoneyFactory {
 	

@@ -1,4 +1,9 @@
 package coinpurse;
+/**
+ * MoneyFactory class for Thailand.
+ * @author Dechabhol Kotheeranurak
+ *
+ */
 
 public class ThaiMoneyFactory extends MoneyFactory {
 	
