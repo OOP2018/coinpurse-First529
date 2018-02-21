@@ -24,9 +24,9 @@ public class Coin extends Money {
 	 * @return String in a specific format
 	 */
 	public String toString() {
-		if (this.getCurrency().equals("Sen"))
-			return String.format("%.2f-%s coin", this.getValue() * 100, this.getCurrency());
-		return String.format("%.2f-%s coin", this.getValue(), this.getCurrency());
+		if (this.getCurrency().equals("Ringgit"))
+			return String.format("%.2f-%s coin", this.getValue() * 100, "Sen");
+		return String.format("%.2f-%s coin", this.getValue(), "Sen");
 	}
 
 }

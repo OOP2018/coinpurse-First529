@@ -7,15 +7,17 @@ package coinpurse;
 
 public class ThaiMoneyFactory extends MoneyFactory {
 	
+	private static long thaiSerial = 1000000; 
+	
 	@Override
 	public Valuable createMoney(double value) {
 		if (isCoin(value)) {
 			return new Coin(value, "Baht");
 		}
 		else if (isBankNote(value)) {
-			return new BankNote(value, "Baht");
+			return new BankNote(value, "Baht", thaiSerial);
 		}
-		 else throw new IllegalArgumentException();
+		 else throw new IllegalArgumentException("The input value doesn't exist in Thailand currency.");
 	}
 	
 	public boolean isCoin(double value) {
@@ -29,7 +31,10 @@ public class ThaiMoneyFactory extends MoneyFactory {
 	public boolean isBankNote(double value) {
 		int[] banknotes = {20,50,100,500,1000};
 		for (int i = 0; i < banknotes.length; i++) {
-			if (value == banknotes[i]) return true;
+			if (value == banknotes[i]) {
+				thaiSerial++;
+				return true;
+			}
 		}
 		return false;
 	}

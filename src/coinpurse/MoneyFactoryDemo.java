@@ -35,6 +35,13 @@ public class MoneyFactoryDemo {
 			System.out.println(f4.createMoney(m));
 		}
 		
+		 MoneyFactory.setFactory(new MalayMoneyFactory());
+	        MoneyFactory f = MoneyFactory.getInstance();
+	        Valuable v = f.createMoney(0.05);
+	        System.out.println(v.toString());
+	        System.out.println(v.getValue());
+	        System.out.println(v.getCurrency());
+		
 		
 		
 		

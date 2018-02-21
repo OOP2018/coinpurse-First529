@@ -7,15 +7,17 @@ package coinpurse;
 
 public class MalayMoneyFactory extends MoneyFactory {
 	
+	private static long malaySerial = 1000000; 
+	
 	@Override
 	public Valuable createMoney(double value) {
 		if (isCoin(value)) {
-			return new Coin(value, "Sen");
+			return new Coin(value, "Ringgit");
 		}
 		else if (isBankNote(value)) {
-			return new BankNote(value, "Ringgit");
+			return new BankNote(value, "Ringgit", malaySerial);
 		}
-		else throw new IllegalArgumentException();
+		else throw new IllegalArgumentException("The input value doesn't exist in Malaysia currency.");
 	}
 	
 	public boolean isCoin(double value) {
@@ -33,7 +35,10 @@ public class MalayMoneyFactory extends MoneyFactory {
 	public boolean isBankNote(double value) {
 		int[] banknotes = {1,2,5,10,20,50,100};
 		for (int i = 0; i < banknotes.length; i++) {
-			if (value == banknotes[i]) return true;
+			if (value == banknotes[i]) {
+				malaySerial++;
+				return true;
+			}
 		}
 		return false;
 	}
