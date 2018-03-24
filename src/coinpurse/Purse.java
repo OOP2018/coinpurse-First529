@@ -1,6 +1,10 @@
 package coinpurse;
 
 import java.util.List;
+
+import coinpurse.strategy.GreedyWithdrawStrategy;
+import coinpurse.strategy.WithdrawStrategy;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -16,6 +20,8 @@ import java.util.Comparator;
 public class Purse {
 	/** Collection of objects in the purse. */
 	private List<Valuable> money;
+	
+	WithdrawStrategy strategy;
 
 	/**
 	 * Capacity is maximum number of items the purse can hold. Capacity is set
@@ -37,6 +43,7 @@ public class Purse {
 	public Purse(int capacity) {
 		money = new ArrayList<Valuable>();
 		this.capacity = capacity;
+		strategy = new GreedyWithdrawStrategy();
 	}
 
 	/**
@@ -131,33 +138,16 @@ public class Purse {
 
 		if (amount == null && amount.getValue() < 1)
 			return null;
-		List<Valuable> templist = new ArrayList<Valuable>();
-		Collections.sort(money, comp);
-		Collections.reverse(money);
-		double amountNeededToWithdraw = amount.getValue();
-		String amountCurrency = amount.getCurrency();
 		
-		for (Valuable c : money) {
-			if (amountCurrency.equalsIgnoreCase(c.getCurrency())) {
-				if (amountNeededToWithdraw >= c.getValue()) {
-					templist.add(c);
-					amountNeededToWithdraw -= c.getValue();
-
-				}
-			}
-			if (amountNeededToWithdraw == 0)
-				break;
-
-		}
-
-		if (amountNeededToWithdraw != 0)
-			return null;
-		for (Valuable c : templist)
-			money.remove(c);
-
+		List<Valuable> templist = strategy.withdraw(amount, money);
+		
 		Valuable[] array = new Valuable[templist.size()];
 		templist.toArray(array);
 		return array;
+	}
+
+	public void setWithdrawStrategy(WithdrawStrategy w) {
+		
 	}
 
 	/**

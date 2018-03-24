@@ -15,10 +15,10 @@ public class BankNote extends Money {
 	 * @param currency
 	 */
 	public BankNote(double value, String currency, long serial) {
-		super(value, currency);
+		super(value,currency);
 		this.serialNumber = serial;
 	}
-	
+
 	/**
 	 * Get the serial number of the bank note.
 	 * @return serialNumber
