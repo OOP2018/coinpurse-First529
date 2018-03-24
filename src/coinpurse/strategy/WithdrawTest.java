@@ -25,7 +25,7 @@ public class WithdrawTest {
 	
 	@Before
 	public void setUp() {
-		strategy = new RecusiveWithdrawStrategy();
+		strategy = new GreedyWithdrawStrategy();
 		list = new ArrayList<>();		
 	}
 	

@@ -147,7 +147,7 @@ public class Purse {
 	}
 
 	public void setWithdrawStrategy(WithdrawStrategy w) {
-		
+		w = new GreedyWithdrawStrategy();
 	}
 
 	/**

@@ -10,8 +10,7 @@ public class GreedyWithdrawStrategy implements WithdrawStrategy {
 
 	@Override
 	public List<Valuable> withdraw(Valuable amount, List<Valuable> money) {
-//		if (amount == null && amount.getValue() < 1)
-//			return null;
+		if (amount == null || amount.getValue() <= 0) return null;
 		List<Valuable> templist = new ArrayList<Valuable>();
 		Collections.sort(money);
 		Collections.reverse(money);
@@ -36,9 +35,7 @@ public class GreedyWithdrawStrategy implements WithdrawStrategy {
 		for (Valuable c : templist)
 			money.remove(c);
 
-//		Valuable[] array = new Valuable[templist.size()];
-//		templist.toArray(array);
-//		return array;
+
 		return templist;
 	}
 
