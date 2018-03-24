@@ -13,9 +13,13 @@ public class RecusiveWithdrawStrategy implements WithdrawStrategy {
 	@Override
 	public List<Valuable> withdraw(Valuable amount, List<Valuable> money) {
 		list.clear();
-		if (helper(0, money, amount))
+		if (amount == null || amount.getValue() == 0) return null;
+		if (helper(0, money, amount)) {
 			return list;
-		return null;
+		} else {
+			return null;
+		}
+		
 	}
 
 	public boolean helper(int start, List<Valuable> money, Valuable amount) {

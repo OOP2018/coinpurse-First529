@@ -10,7 +10,7 @@ public abstract class MoneyFactory {
 	
 	public static MoneyFactory getInstance() {
 		if (instance == null) {
-			instance = new MalayMoneyFactory();
+			instance = new ThaiMoneyFactory();
 		}
 		return instance;
 	}
